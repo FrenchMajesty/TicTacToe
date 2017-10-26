@@ -56,9 +56,8 @@ while(playAgain) {
                 Game.isGameOver = true
                 Game.refreshFrame()
                 Game.anounceWinner()
-            }
-            
-            if(Game.isBoardFull()) {
+                
+            }else if(Game.isBoardFull()) {
                 
                 Game.isGameOver = true
                 Game.refreshFrame()
