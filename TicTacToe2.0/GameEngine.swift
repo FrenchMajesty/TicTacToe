@@ -126,11 +126,10 @@ class GameEngine : GameInterface {
     func thereIsAWinner() -> Bool {
         // Check if ^
         
-        /* Algorithm to figure out near-by grid squares */
+        // Algorithm to get near-by squares of same value
         if let neighborGrids: [GridSquare] = getSimilarGrid(around: lastPlayedGrid!) {
-        
             for grid in neighborGrids {
-                /* More Algorithm */
+                // Find the 'last' square and verify if it's the same value
                 if let foundGrid = findLastMatchingGrid(first: lastPlayedGrid!, second: grid) {
                     if(foundGrid.getValue() == lastPlayedGrid?.getValue()) {
                         return true
@@ -143,7 +142,6 @@ class GameEngine : GameInterface {
     }
     
     func isBoardFull() -> Bool {
-        
         for row in board {
             for square in row {
                 if(square.isEmpty()) { return false }
@@ -186,7 +184,8 @@ class GameEngine : GameInterface {
                 (0,1), // S
                 (-1,1), // SW
                 (-1,0), // W
-                (-1,-1)] // NW
+                (-1,-1) // NW
+            ]
         
          // Get all grid squares around with same value
         var result: [GridSquare] = []
@@ -214,11 +213,11 @@ class GameEngine : GameInterface {
     }
     
     internal func findLastMatchingGrid(first grid1: GridSquare, second grid2: GridSquare) -> GridSquare? {
-        let matrix1: (Int, Int) = grid1.getMatrixCoordinates(), // 1 , 0
-            matrix2: (Int, Int) = grid2.getMatrixCoordinates() // 0 , 0
+        let matrix1: (Int, Int) = grid1.getMatrixCoordinates(),
+            matrix2: (Int, Int) = grid2.getMatrixCoordinates()
 
-        let firstSlope = (matrix1.0 - matrix2.0, matrix1.1 - matrix2.1), // 1 ,0
-            lastSlope = (matrix2.0 - matrix1.0, matrix2.1 - matrix1.1) // -1 , 0
+        let firstSlope = (matrix1.0 - matrix2.0, matrix1.1 - matrix2.1),
+            lastSlope = (matrix2.0 - matrix1.0, matrix2.1 - matrix1.1)
         
         let newestGrid = grid1.getMatrixCoordinates(),
             olderGrid = grid2.getMatrixCoordinates()
